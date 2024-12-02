@@ -9,6 +9,18 @@ class CarrotCloneApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Hello App Bar'),
+        ),
+        body: Container(
+          decoration: const BoxDecoration(color: Colors.amber),
+          child: const Center(
+            child: Text('Hello Body'),
+          ),
+        ),
+      ),
+    );
   }
 }
