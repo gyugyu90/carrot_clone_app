@@ -12,7 +12,26 @@ class CarrotCloneApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Hello App Bar'),
+          title: GestureDetector(
+            child: const Row(
+              children: [
+                Text(
+                  '노량진제1동',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 19,
+                  ),
+                ),
+                Icon(
+                  Icons.expand_more_sharp,
+                  size: 30,
+                ),
+              ],
+            ),
+            onTap: () {
+              debugPrint('TODO 동네 선택');
+            },
+          ),
           actions: [
             IconButton(
               onPressed: () {
