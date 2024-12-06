@@ -13,6 +13,29 @@ class CarrotCloneApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Hello App Bar'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                debugPrint('TODO 검색');
+              },
+              icon: const Icon(
+                Icons.search,
+                size: 30,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                debugPrint('TODO 알림 조회');
+              },
+              icon: const Icon(
+                Icons.notifications_outlined,
+                size: 30,
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            )
+          ],
         ),
         body: Container(
           decoration: const BoxDecoration(color: Colors.amber),
