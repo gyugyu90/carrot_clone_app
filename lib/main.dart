@@ -57,11 +57,37 @@ class CarrotCloneApp extends StatelessWidget {
           ],
         ),
         body: Container(
-          decoration: const BoxDecoration(color: Colors.amber),
-          child: const Center(
-            child: Text('Hello Body'),
-          ),
-        ),
+            decoration:
+                const BoxDecoration(color: Color.fromARGB(32, 255, 193, 7)),
+            child: const Row(
+              children: [
+                Image(
+                  image: AssetImage('assets/images/placeholder.png'),
+                  width: 100,
+                  height: 100,
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('제목'),
+                      Text('장소, 포스팅 날짜'),
+                      Text('가격'),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(Icons.comment_outlined),
+                          Text('2'),
+                          Icon(Icons.favorite_border_outlined),
+                          Text('5'),
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
+            )),
       ),
     );
   }
