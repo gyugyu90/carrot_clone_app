@@ -1,9 +1,13 @@
+import 'package:carrot_clone_app/models/home_feed.dart';
 import 'package:flutter/material.dart';
 
 class HomeFeedListItem extends StatelessWidget {
   const HomeFeedListItem({
     super.key,
+    required this.homeFeed,
   });
+
+  final HomeFeed homeFeed;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +26,9 @@ class HomeFeedListItem extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: const Image(
-                    image: AssetImage('assets/images/placeholder.png'),
+                  child: Image(
+                    image: AssetImage(
+                        'assets/images/${homeFeed.thumbnailImageUrl}'),
                     width: 100,
                     height: 100,
                   ),
@@ -32,16 +37,16 @@ class HomeFeedListItem extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              const Expanded(
+              Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(right: 35.0),
+                      padding: const EdgeInsets.only(right: 35.0),
                       child: Text(
-                        '접이식 원형 테이블, 가로 700 높이 720, 한 달 밖에 안 쓴 완전 새 제품입니다. 매우 튼튼해요!!!!!!!!!!!!!!!!!!',
-                        style: TextStyle(
+                        homeFeed.title,
+                        style: const TextStyle(
                           fontSize: 15,
                           color: Colors.black,
                         ),
@@ -50,13 +55,13 @@ class HomeFeedListItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '상도동 · 1주 전',
-                      style: TextStyle(
+                      '${homeFeed.region} · 1주 전',
+                      style: const TextStyle(
                         color: Color.fromARGB(255, 64, 64, 64),
                         fontSize: 13,
                       ),
                     ),
-                    Text(
+                    const Text(
                       '10,000원',
                       style: TextStyle(
                         color: Colors.black,
@@ -67,7 +72,7 @@ class HomeFeedListItem extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 17,
                           child: Icon(
                             Icons.comment_outlined,
@@ -76,13 +81,13 @@ class HomeFeedListItem extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '2',
-                          style: TextStyle(
+                          homeFeed.comments.toString(),
+                          style: const TextStyle(
                             fontSize: 13,
                             color: Color.fromARGB(255, 100, 100, 100),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 17,
                           child: Icon(
                             Icons.favorite_border_outlined,
@@ -91,8 +96,8 @@ class HomeFeedListItem extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '5',
-                          style: TextStyle(
+                          homeFeed.likes.toString(),
+                          style: const TextStyle(
                             fontSize: 13,
                             color: Color.fromARGB(255, 100, 100, 100),
                           ),

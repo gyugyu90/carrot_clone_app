@@ -1,4 +1,5 @@
 import 'package:carrot_clone_app/components/home_feed_list_item.dart';
+import 'package:carrot_clone_app/data/example_feeds.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -59,7 +60,10 @@ class CarrotCloneApp extends StatelessWidget {
         ),
         body: ListView.separated(
           itemBuilder: (context, index) {
-            return const HomeFeedListItem();
+            var homeFeed = dummyHomeFeeds[index];
+            return HomeFeedListItem(
+              homeFeed: homeFeed,
+            );
           },
           itemCount: 10,
           separatorBuilder: (context, index) {
