@@ -1,3 +1,5 @@
+import 'package:carrot_clone_app/extensions/date_time_extension.dart';
+import 'package:carrot_clone_app/extensions/int_extension.dart';
 import 'package:carrot_clone_app/models/home_feed.dart';
 import 'package:flutter/material.dart';
 
@@ -55,15 +57,15 @@ class HomeFeedListItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${homeFeed.region} · 1주 전',
+                      '${homeFeed.region} · ${homeFeed.created.timeAgo()}',
                       style: const TextStyle(
                         color: Color.fromARGB(255, 64, 64, 64),
                         fontSize: 13,
                       ),
                     ),
-                    const Text(
-                      '10,000원',
-                      style: TextStyle(
+                    Text(
+                      '${homeFeed.price.withComma()}원',
+                      style: const TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
