@@ -65,7 +65,7 @@ class CarrotCloneApp extends StatelessWidget {
               homeFeed: homeFeed,
             );
           },
-          itemCount: 10,
+          itemCount: dummyHomeFeeds.length,
           separatorBuilder: (context, index) {
             return const Divider(
               thickness: 0.25,
