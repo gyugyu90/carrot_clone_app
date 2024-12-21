@@ -1,3 +1,5 @@
+import 'package:carrot_clone_app/extensions/int_extension.dart';
+
 class HomeFeed {
   final int id;
   final String thumbnailImageUrl;
@@ -18,4 +20,6 @@ class HomeFeed {
     required this.comments,
     required this.likes,
   });
+
+  String get displayPrice => price > 0 ? '${price.withComma()}원' : '나눔 🧡';
 }

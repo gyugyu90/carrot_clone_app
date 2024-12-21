@@ -1,5 +1,4 @@
 import 'package:carrot_clone_app/extensions/date_time_extension.dart';
-import 'package:carrot_clone_app/extensions/int_extension.dart';
 import 'package:carrot_clone_app/models/home_feed.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +17,7 @@ class HomeFeedListItem extends StatelessWidget {
       child: Stack(
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 decoration: ShapeDecoration(
@@ -64,7 +64,7 @@ class HomeFeedListItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${homeFeed.price.withComma()}원',
+                      homeFeed.displayPrice,
                       style: const TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -74,36 +74,40 @@ class HomeFeedListItem extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const SizedBox(
-                          width: 17,
-                          child: Icon(
-                            Icons.comment_outlined,
-                            size: 15,
-                            color: Colors.grey,
+                        if (homeFeed.comments > 0) ...[
+                          const SizedBox(
+                            width: 17,
+                            child: Icon(
+                              Icons.comment_outlined,
+                              size: 15,
+                              color: Colors.grey,
+                            ),
                           ),
-                        ),
-                        Text(
-                          homeFeed.comments.toString(),
-                          style: const TextStyle(
-                            fontSize: 13,
-                            color: Color.fromARGB(255, 100, 100, 100),
+                          Text(
+                            homeFeed.comments.toString(),
+                            style: const TextStyle(
+                              fontSize: 13,
+                              color: Color.fromARGB(255, 100, 100, 100),
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 17,
-                          child: Icon(
-                            Icons.favorite_border_outlined,
-                            size: 15,
-                            color: Colors.grey,
+                        ],
+                        if (homeFeed.likes > 0) ...[
+                          const SizedBox(
+                            width: 17,
+                            child: Icon(
+                              Icons.favorite_border_outlined,
+                              size: 15,
+                              color: Colors.grey,
+                            ),
                           ),
-                        ),
-                        Text(
-                          homeFeed.likes.toString(),
-                          style: const TextStyle(
-                            fontSize: 13,
-                            color: Color.fromARGB(255, 100, 100, 100),
+                          Text(
+                            homeFeed.likes.toString(),
+                            style: const TextStyle(
+                              fontSize: 13,
+                              color: Color.fromARGB(255, 100, 100, 100),
+                            ),
                           ),
-                        ),
+                        ],
                       ],
                     )
                   ],
