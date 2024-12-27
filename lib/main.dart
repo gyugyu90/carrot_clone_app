@@ -10,8 +10,26 @@ class CarrotCloneApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomeScreen(),
+    return MaterialApp(
+      theme: ThemeData(
+        inputDecorationTheme: InputDecorationTheme(
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: Colors.grey,
+              width: 0.5,
+            ),
+            borderRadius: BorderRadius.circular(6),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: Colors.black,
+              width: 0.5,
+            ),
+            borderRadius: BorderRadius.circular(6),
+          ),
+        ),
+      ),
+      home: const HomeScreen(),
     );
   }
 }

@@ -43,24 +43,7 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const FormLabel('제목'),
-            TextField(
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.grey,
-                    width: 0.5,
-                  ),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.black,
-                    width: 0.5,
-                  ),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-              ),
-            ),
+            const TextField(),
             const SizedBox(height: 30),
             const FormLabel('거래방식'),
             const TextField(),
