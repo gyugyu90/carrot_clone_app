@@ -9,6 +9,22 @@ class SellMyGoodsScreen extends StatefulWidget {
 
 class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
   @override
+  void initState() {
+    super.initState();
+
+    debugPrint('_SellMyGoodsScreenState initState called');
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    debugPrint('_SellMyGoodsScreenState dispose called');
+  }
+
+  var tempSaveButtonColor = Colors.grey;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -27,10 +43,10 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
         actions: [
           TextButton(
             onPressed: () {},
-            child: const Text(
+            child: Text(
               '임시저장',
               style: TextStyle(
-                color: Colors.grey,
+                color: tempSaveButtonColor,
                 fontSize: 18,
               ),
             ),
@@ -43,7 +59,15 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const FormLabel('제목'),
-            const TextField(),
+            TextField(
+              onChanged: (value) {
+                // debugPrint('TextField.onChanged $value');
+                setState(() {
+                  tempSaveButtonColor =
+                      value.isEmpty ? Colors.grey : Colors.orange;
+                });
+              },
+            ),
             const SizedBox(height: 30),
             const FormLabel('거래방식'),
             const TextField(),
