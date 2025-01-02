@@ -78,7 +78,6 @@ class HomeScreen extends StatelessWidget {
         shape: const CircleBorder(),
         elevation: 1,
         onPressed: () {
-          // debugPrint('내 물건 팔기');
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => const SellMyGoodsScreen(),
           ));
