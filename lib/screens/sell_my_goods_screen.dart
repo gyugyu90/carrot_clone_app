@@ -1,13 +1,23 @@
+import 'package:carrot_clone_app/models/home_feed.dart';
 import 'package:flutter/material.dart';
 
 class SellMyGoodsScreen extends StatefulWidget {
-  const SellMyGoodsScreen({super.key});
+  const SellMyGoodsScreen({
+    super.key,
+    required this.onSave,
+  });
+
+  final void Function(HomeFeed homeFeed) onSave;
 
   @override
   State<SellMyGoodsScreen> createState() => _SellMyGoodsScreenState();
 }
 
 class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
+  final _titleTextEditingController = TextEditingController();
+  final _priceTextEditingController = TextEditingController();
+  final _descriptionTextEditingController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -20,6 +30,10 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
     super.dispose();
 
     debugPrint('_SellMyGoodsScreenState dispose called');
+
+    _titleTextEditingController.dispose();
+    _priceTextEditingController.dispose();
+    _descriptionTextEditingController.dispose();
   }
 
   var tempSaveButtonColor = Colors.grey;
@@ -61,21 +75,46 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
             const FormLabel('제목'),
             TextField(
               onChanged: (value) {
-                // debugPrint('TextField.onChanged $value');
                 setState(() {
                   tempSaveButtonColor =
                       value.isEmpty ? Colors.grey : Colors.orange;
                 });
               },
+              controller: _titleTextEditingController,
             ),
             const SizedBox(height: 30),
             const FormLabel('거래방식'),
-            const TextField(),
+            TextField(
+              controller: _priceTextEditingController,
+            ),
             const SizedBox(height: 30),
             const FormLabel('자세한 설명'),
-            const TextField(),
+            TextField(
+              controller: _descriptionTextEditingController,
+            ),
             const SizedBox(height: 30),
-            FilledButton(onPressed: () {}, child: const Text('작성 완료'))
+            FilledButton(
+                onPressed: () {
+                  debugPrint('''content:
+title: ${_titleTextEditingController.text},
+price: ${_priceTextEditingController.text},
+description: ${_descriptionTextEditingController.text}''');
+
+                  final newFeed = HomeFeed(
+                    id: 999,
+                    thumbnailImageUrl: 'placeholder.png',
+                    title: _titleTextEditingController.text,
+                    region: '강남구',
+                    created: DateTime.now(),
+                    price: int.parse(_priceTextEditingController.text),
+                    comments: 0,
+                    likes: 0,
+                  );
+
+                  widget.onSave(newFeed);
+                  Navigator.of(context).pop();
+                },
+                child: const Text('작성 완료'))
           ],
         ),
       ),

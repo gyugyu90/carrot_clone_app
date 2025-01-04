@@ -3,10 +3,17 @@ import 'package:carrot_clone_app/data/example_feeds.dart';
 import 'package:carrot_clone_app/screens/sell_my_goods_screen.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,
   });
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _list = [...dummyHomeFeeds];
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +65,12 @@ class HomeScreen extends StatelessWidget {
       ),
       body: ListView.separated(
         itemBuilder: (context, index) {
-          var homeFeed = dummyHomeFeeds[index];
+          var homeFeed = _list[index];
           return HomeFeedListItem(
             homeFeed: homeFeed,
           );
         },
-        itemCount: dummyHomeFeeds.length,
+        itemCount: _list.length,
         separatorBuilder: (context, index) {
           return const Divider(
             thickness: 0.25,
@@ -79,7 +86,13 @@ class HomeScreen extends StatelessWidget {
         elevation: 1,
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const SellMyGoodsScreen(),
+            builder: (context) => SellMyGoodsScreen(
+              onSave: (homeFeed) {
+                setState(() {
+                  _list.add(homeFeed);
+                });
+              },
+            ),
           ));
         },
         child: const Icon(Icons.add),
