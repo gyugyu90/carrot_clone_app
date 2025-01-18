@@ -1,8 +1,18 @@
+import 'package:carrot_clone_app/firebase_options.dart';
 import 'package:carrot_clone_app/screens/home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  configureFirebase();
   runApp(const CarrotCloneApp());
+}
+
+void configureFirebase() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 class CarrotCloneApp extends StatelessWidget {
