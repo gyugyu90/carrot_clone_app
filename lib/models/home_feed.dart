@@ -1,7 +1,7 @@
 import 'package:carrot_clone_app/extensions/int_extension.dart';
 
 class HomeFeed {
-  final int id;
+  final String id;
   final String thumbnailImageUrl;
   final String title;
   final String region;

@@ -2,7 +2,7 @@ import '../models/home_feed.dart';
 
 var dummyHomeFeeds = [
   HomeFeed(
-    id: 1,
+    id: '1',
     title: "민법 합격 필기노트 팝니다",
     created: DateTime.now().add(const Duration(seconds: -3)),
     region: "상도동",
@@ -12,7 +12,7 @@ var dummyHomeFeeds = [
     price: 10000,
   ),
   HomeFeed(
-    id: 2,
+    id: '2',
     title: "베이지색 반바지 100 사이즈",
     created: DateTime.now().add(const Duration(days: -2)),
     region: "여의도동",
@@ -22,7 +22,7 @@ var dummyHomeFeeds = [
     price: 35000,
   ),
   HomeFeed(
-    id: 3,
+    id: '3',
     title: "Carrot 클론 코딩 무료로 가르쳐드립니다. 초보 환영 열심히 하실 분만 😊😊😊",
     created: DateTime.now().add(const Duration(minutes: -5)),
     region: "본동",
@@ -32,7 +32,7 @@ var dummyHomeFeeds = [
     price: 0,
   ),
   HomeFeed(
-    id: 4,
+    id: '4',
     title: "스타벅스 기프트 카드 5만원권",
     created: DateTime.now().add(const Duration(minutes: -23)),
     region: "노량진동",
@@ -42,7 +42,7 @@ var dummyHomeFeeds = [
     price: 48000,
   ),
   HomeFeed(
-    id: 5,
+    id: '5',
     title: "블루투스 키보드 저소음 적축",
     created: DateTime.now().add(const Duration(hours: -1)),
     region: "여의도동",
@@ -52,7 +52,7 @@ var dummyHomeFeeds = [
     price: 99000,
   ),
   HomeFeed(
-    id: 6,
+    id: '6',
     title: "공룡 모형",
     created: DateTime.now().add(const Duration(hours: -4)),
     region: "흑석동",
@@ -62,7 +62,7 @@ var dummyHomeFeeds = [
     price: 59000,
   ),
   HomeFeed(
-    id: 7,
+    id: '7',
     title: "여성 핑크 트위드 자켓",
     created: DateTime.now().add(const Duration(minutes: -50)),
     region: "도림동",
@@ -72,7 +72,7 @@ var dummyHomeFeeds = [
     price: 25000,
   ),
   HomeFeed(
-    id: 8,
+    id: '8',
     title: "미니스커트",
     created: DateTime.now().add(const Duration(hours: -2)),
     region: "노량진동",
@@ -82,7 +82,7 @@ var dummyHomeFeeds = [
     price: 9500,
   ),
   HomeFeed(
-    id: 9,
+    id: '9',
     title: "급전이 필요해서 처분합니다ㅜ 롤렉스 시계",
     created: DateTime.now().add(const Duration(days: -2)),
     region: "보라매동",
@@ -92,7 +92,7 @@ var dummyHomeFeeds = [
     price: 18000000,
   ),
   HomeFeed(
-    id: 10,
+    id: '10',
     title: "흰색 테디베어 곰인형",
     created: DateTime.now().add(const Duration(days: -6)),
     region: "구로동",
@@ -102,7 +102,7 @@ var dummyHomeFeeds = [
     price: 5000,
   ),
   HomeFeed(
-    id: 11,
+    id: '11',
     title: "대장 아파트 34평 A타입 8층/노량진역 도보 5분",
     created: DateTime.now().add(const Duration(minutes: -24)),
     region: "노량진동",

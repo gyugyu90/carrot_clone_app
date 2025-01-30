@@ -102,6 +102,7 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
                     'title': _titleTextEditingController.text,
                     'description': _descriptionTextEditingController.text,
                     'price': int.parse(_priceTextEditingController.text),
+                    'created': DateTime.now(),
                   }).then(
                     (value) {
                       debugPrint('saved id:: ${value.id}');
