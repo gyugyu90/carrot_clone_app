@@ -96,22 +96,6 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
             const SizedBox(height: 30),
             FilledButton(
                 onPressed: () {
-                  debugPrint('''content:
-title: ${_titleTextEditingController.text},
-price: ${_priceTextEditingController.text},
-description: ${_descriptionTextEditingController.text}''');
-
-                  // final newFeed = HomeFeed(
-                  //   id: 999,
-                  //   thumbnailImageUrl: 'placeholder.png',
-                  //   title: _titleTextEditingController.text,
-                  //   region: '강남구',
-                  //   created: DateTime.now(),
-                  //   price: int.parse(_priceTextEditingController.text),
-                  //   comments: 0,
-                  //   likes: 0,
-                  // );
-
                   final db = FirebaseFirestore.instance;
 
                   db.collection('usedGood').add({
