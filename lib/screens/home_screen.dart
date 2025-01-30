@@ -1,6 +1,7 @@
 import 'package:carrot_clone_app/components/home_feed_list_item.dart';
-import 'package:carrot_clone_app/data/example_feeds.dart';
+import 'package:carrot_clone_app/models/home_feed.dart';
 import 'package:carrot_clone_app/screens/sell_my_goods_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,7 +14,40 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _list = [...dummyHomeFeeds];
+  final _list = <HomeFeed>[];
+
+  @override
+  void initState() {
+    super.initState();
+
+    fetchHomeFeeds();
+  }
+
+  void fetchHomeFeeds() async {
+    final db = FirebaseFirestore.instance;
+    await db.collection("usedGood").get().then((event) {
+      var list = <HomeFeed>[];
+      for (var doc in event.docs) {
+        var data = doc.data();
+        final homeFeed = HomeFeed(
+          id: 0,
+          thumbnailImageUrl: 'placeholder.png',
+          title: data['title'],
+          price: data['price'],
+          region: '노량진동',
+          created: DateTime.now().add(const Duration(minutes: -5)),
+          comments: 0,
+          likes: 0,
+        );
+
+        list.add(homeFeed);
+      }
+
+      setState(() {
+        _list.addAll(list);
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:carrot_clone_app/models/home_feed.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class SellMyGoodsScreen extends StatefulWidget {
@@ -100,18 +101,29 @@ title: ${_titleTextEditingController.text},
 price: ${_priceTextEditingController.text},
 description: ${_descriptionTextEditingController.text}''');
 
-                  final newFeed = HomeFeed(
-                    id: 999,
-                    thumbnailImageUrl: 'placeholder.png',
-                    title: _titleTextEditingController.text,
-                    region: '강남구',
-                    created: DateTime.now(),
-                    price: int.parse(_priceTextEditingController.text),
-                    comments: 0,
-                    likes: 0,
+                  // final newFeed = HomeFeed(
+                  //   id: 999,
+                  //   thumbnailImageUrl: 'placeholder.png',
+                  //   title: _titleTextEditingController.text,
+                  //   region: '강남구',
+                  //   created: DateTime.now(),
+                  //   price: int.parse(_priceTextEditingController.text),
+                  //   comments: 0,
+                  //   likes: 0,
+                  // );
+
+                  final db = FirebaseFirestore.instance;
+
+                  db.collection('usedGood').add({
+                    'title': _titleTextEditingController.text,
+                    'description': _descriptionTextEditingController.text,
+                    'price': int.parse(_priceTextEditingController.text),
+                  }).then(
+                    (value) {
+                      debugPrint('saved id:: ${value.id}');
+                    },
                   );
 
-                  widget.onSave(newFeed);
                   Navigator.of(context).pop();
                 },
                 child: const Text('작성 완료'))

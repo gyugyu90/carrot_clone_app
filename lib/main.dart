@@ -3,12 +3,12 @@ import 'package:carrot_clone_app/screens/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  configureFirebase();
+void main() async {
+  await configureFirebase();
   runApp(const CarrotCloneApp());
 }
 
-void configureFirebase() async {
+Future<void> configureFirebase() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
