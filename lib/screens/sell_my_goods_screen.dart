@@ -1,3 +1,5 @@
+import 'package:carrot_clone_app/components/goods_image_list_view.dart';
+import 'package:carrot_clone_app/models/goods_image.dart';
 import 'package:carrot_clone_app/models/home_feed.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -73,6 +75,18 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            GoodsImageListView(
+              images: [
+                GoodsImage(
+                    localImagePath: 'books.png',
+                    main: true,
+                    remoteImageUrl: null),
+                GoodsImage(
+                    localImagePath: 'dinosaurs.png',
+                    main: false,
+                    remoteImageUrl: null),
+              ],
+            ),
             const FormLabel('제목'),
             TextField(
               onChanged: (value) {
