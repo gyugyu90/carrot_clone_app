@@ -78,13 +78,13 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
             GoodsImageListView(
               images: [
                 GoodsImage(
-                    localImagePath: 'books.png',
-                    main: true,
-                    remoteImageUrl: null),
+                  localImagePath: 'books.png',
+                  remoteImageUrl: null,
+                ),
                 GoodsImage(
-                    localImagePath: 'dinosaurs.png',
-                    main: false,
-                    remoteImageUrl: null),
+                  localImagePath: 'dinosaurs.png',
+                  remoteImageUrl: null,
+                ),
               ],
             ),
             const FormLabel('제목'),

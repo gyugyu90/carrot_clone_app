@@ -18,7 +18,10 @@ class GoodsImageListView extends StatelessWidget {
         itemBuilder: (context, index) {
           return index == 0
               ? const AddImageButton()
-              : GoodsImageBox(image: images[index - 1]);
+              : GoodsImageBox(
+                  image: images[index - 1],
+                  main: index == 1,
+                );
         },
         scrollDirection: Axis.horizontal,
         itemCount: images.length + 1,
@@ -31,9 +34,11 @@ class GoodsImageBox extends StatelessWidget {
   const GoodsImageBox({
     super.key,
     required this.image,
+    required this.main,
   });
 
   final GoodsImage image;
+  final bool main;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +76,7 @@ class GoodsImageBox extends StatelessWidget {
             ),
           ),
         ),
-        if (image.main)
+        if (main)
           Positioned(
             bottom: 5,
             child: Container(
