@@ -3,6 +3,7 @@ import 'package:carrot_clone_app/models/goods_image.dart';
 import 'package:carrot_clone_app/models/home_feed.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SellMyGoodsScreen extends StatefulWidget {
   const SellMyGoodsScreen({
@@ -20,6 +21,8 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
   final _titleTextEditingController = TextEditingController();
   final _priceTextEditingController = TextEditingController();
   final _descriptionTextEditingController = TextEditingController();
+
+  final _images = <GoodsImage>[];
 
   @override
   void initState() {
@@ -40,6 +43,24 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
   }
 
   var tempSaveButtonColor = Colors.grey;
+
+  void _pickAndUploadImage() async {
+    debugPrint('_pickAndUploadImage');
+
+    var imagePicker = ImagePicker();
+    var files = await imagePicker.pickMultiImage(imageQuality: 50, limit: 10);
+
+    for (var file in files) {
+      debugPrint('file:: ${file.name} ${file.path} ${file.mimeType}');
+
+      setState(() {
+        _images.add(GoodsImage(
+          localImagePath: file.path,
+          remoteImageUrl: null,
+        ));
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,16 +97,8 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             GoodsImageListView(
-              images: [
-                GoodsImage(
-                  localImagePath: 'books.png',
-                  remoteImageUrl: null,
-                ),
-                GoodsImage(
-                  localImagePath: 'dinosaurs.png',
-                  remoteImageUrl: null,
-                ),
-              ],
+              images: _images,
+              onAddImage: _pickAndUploadImage,
             ),
             const FormLabel('제목'),
             TextField(

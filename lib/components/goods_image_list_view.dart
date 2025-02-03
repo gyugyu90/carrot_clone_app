@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carrot_clone_app/models/goods_image.dart';
 import 'package:flutter/material.dart';
 
@@ -5,9 +7,11 @@ class GoodsImageListView extends StatelessWidget {
   const GoodsImageListView({
     super.key,
     required this.images,
+    required this.onAddImage,
   });
 
   final List<GoodsImage> images;
+  final void Function() onAddImage;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,9 @@ class GoodsImageListView extends StatelessWidget {
       child: ListView.builder(
         itemBuilder: (context, index) {
           return index == 0
-              ? const AddImageButton()
+              ? AddImageButton(
+                  onAddImage: onAddImage,
+                )
               : GoodsImageBox(
                   image: images[index - 1],
                   main: index == 1,
@@ -54,8 +60,9 @@ class GoodsImageBox extends StatelessWidget {
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(3),
-            child: Image.asset(
-              'assets/images/${image.localImagePath}',
+            child: Image.file(
+              File(image.localImagePath),
+              fit: BoxFit.cover,
             ),
           ),
         ),
@@ -100,33 +107,39 @@ class GoodsImageBox extends StatelessWidget {
 class AddImageButton extends StatelessWidget {
   const AddImageButton({
     super.key,
+    required this.onAddImage,
   });
+
+  final void Function() onAddImage;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 60,
-      margin: const EdgeInsets.only(right: 10, top: 5, bottom: 5),
-      decoration: BoxDecoration(
-        border: Border.all(width: 0.5, color: Colors.grey),
-        borderRadius: BorderRadius.circular(3),
-      ),
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.photo_camera,
-            color: Colors.grey,
-            size: 24,
-          ),
-          Text(
-            "0/10",
-            style: TextStyle(
-              fontSize: 11,
-              color: Colors.black54,
+    return GestureDetector(
+      onTap: onAddImage,
+      child: Container(
+        width: 60,
+        margin: const EdgeInsets.only(right: 10, top: 5, bottom: 5),
+        decoration: BoxDecoration(
+          border: Border.all(width: 0.5, color: Colors.grey),
+          borderRadius: BorderRadius.circular(3),
+        ),
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.photo_camera,
+              color: Colors.grey,
+              size: 24,
             ),
-          )
-        ],
+            Text(
+              "0/10",
+              style: TextStyle(
+                fontSize: 11,
+                color: Colors.black54,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
