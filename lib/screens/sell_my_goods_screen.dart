@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
 
 class SellMyGoodsScreen extends StatefulWidget {
   const SellMyGoodsScreen({
@@ -66,7 +67,11 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
     }
 
     for (var file in files) {
-      final task = await imagesRef.child(file.name).putFile(File(file.path));
+      final uuid = const Uuid().v8();
+      final fileExtension = file.name.split('.').last;
+      final task = await imagesRef
+          .child('$uuid.$fileExtension')
+          .putFile(File(file.path));
       final downloadUrl = await task.ref.getDownloadURL();
       _images.where((e) => e.localImagePath == file.path).forEach((e) {
         e.remoteImageUrl = downloadUrl;
