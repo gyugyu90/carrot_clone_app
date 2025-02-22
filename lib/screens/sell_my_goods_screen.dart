@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:carrot_clone_app/components/goods_image_list_view.dart';
 import 'package:carrot_clone_app/models/goods_image.dart';
 import 'package:carrot_clone_app/models/home_feed.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -50,14 +53,23 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
     var imagePicker = ImagePicker();
     var files = await imagePicker.pickMultiImage(imageQuality: 50, limit: 10);
 
-    for (var file in files) {
-      debugPrint('file:: ${file.name} ${file.path} ${file.mimeType}');
+    final storageRef = FirebaseStorage.instance.ref();
+    final imagesRef = storageRef.child('images');
 
+    for (var file in files) {
       setState(() {
         _images.add(GoodsImage(
           localImagePath: file.path,
           remoteImageUrl: null,
         ));
+      });
+    }
+
+    for (var file in files) {
+      final task = await imagesRef.child(file.name).putFile(File(file.path));
+      final downloadUrl = await task.ref.getDownloadURL();
+      _images.where((e) => e.localImagePath == file.path).forEach((e) {
+        e.remoteImageUrl = downloadUrl;
       });
     }
   }
