@@ -69,12 +69,14 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
     for (var file in files) {
       final uuid = const Uuid().v8();
       final fileExtension = file.name.split('.').last;
-      final task = await imagesRef
+      imagesRef
           .child('$uuid.$fileExtension')
-          .putFile(File(file.path));
-      final downloadUrl = await task.ref.getDownloadURL();
-      _images.where((e) => e.localImagePath == file.path).forEach((e) {
-        e.remoteImageUrl = downloadUrl;
+          .putFile(File(file.path))
+          .then((task) async {
+        final downloadUrl = await task.ref.getDownloadURL();
+        _images.where((e) => e.localImagePath == file.path).forEach((e) {
+          e.remoteImageUrl = downloadUrl;
+        });
       });
     }
   }
