@@ -23,6 +23,7 @@ class GoodsImageListView extends StatelessWidget {
           return index == 0
               ? AddImageButton(
                   onAddImage: onAddImage,
+                  imageCount: images.length,
                 )
               : GoodsImageBox(
                   image: images[index - 1],
@@ -108,9 +109,11 @@ class AddImageButton extends StatelessWidget {
   const AddImageButton({
     super.key,
     required this.onAddImage,
+    required this.imageCount,
   });
 
   final void Function() onAddImage;
+  final int imageCount;
 
   @override
   Widget build(BuildContext context) {
@@ -123,20 +126,34 @@ class AddImageButton extends StatelessWidget {
           border: Border.all(width: 0.5, color: Colors.grey),
           borderRadius: BorderRadius.circular(3),
         ),
-        child: const Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.photo_camera,
               color: Colors.grey,
               size: 24,
             ),
-            Text(
-              "0/10",
-              style: TextStyle(
-                fontSize: 11,
-                color: Colors.black54,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  imageCount.toString(),
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: imageCount == 0
+                        ? Colors.black54
+                        : Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                const Text(
+                  "/10",
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: Colors.black54,
+                  ),
+                ),
+              ],
             )
           ],
         ),

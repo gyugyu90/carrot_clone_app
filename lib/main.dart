@@ -20,8 +20,13 @@ class CarrotCloneApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const primaryColor = Color.fromARGB(255, 255, 111, 15);
     return MaterialApp(
       theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: primaryColor,
+          primary: primaryColor,
+        ),
         inputDecorationTheme: InputDecorationTheme(
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(
