@@ -144,11 +144,19 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
                 onPressed: () {
                   final db = FirebaseFirestore.instance;
 
+                  final remoteImageUrls = _images
+                      .where((e) =>
+                          e.remoteImageUrl != null &&
+                          e.remoteImageUrl!.isNotEmpty)
+                      .map((e) => e.remoteImageUrl!)
+                      .toList();
+
                   db.collection('usedGood').add({
                     'title': _titleTextEditingController.text,
                     'description': _descriptionTextEditingController.text,
                     'price': int.parse(_priceTextEditingController.text),
                     'created': DateTime.now(),
+                    'images': remoteImageUrls,
                   }).then(
                     (value) {
                       debugPrint('saved id:: ${value.id}');

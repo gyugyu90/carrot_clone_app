@@ -1,4 +1,5 @@
 import 'package:carrot_clone_app/extensions/date_time_extension.dart';
+import 'package:carrot_clone_app/extensions/string_extension.dart';
 import 'package:carrot_clone_app/models/home_feed.dart';
 import 'package:flutter/material.dart';
 
@@ -28,12 +29,19 @@ class HomeFeedListItem extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image(
-                    image: AssetImage(
-                        'assets/images/${homeFeed.thumbnailImageUrl}'),
-                    width: 100,
-                    height: 100,
-                  ),
+                  child: homeFeed.thumbnailImageUrl.isRemoteSource
+                      ? Image.network(
+                          homeFeed.thumbnailImageUrl,
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        )
+                      : Image(
+                          image: AssetImage(
+                              'assets/images/${homeFeed.thumbnailImageUrl}'),
+                          width: 100,
+                          height: 100,
+                        ),
                 ),
               ),
               const SizedBox(

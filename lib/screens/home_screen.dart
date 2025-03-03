@@ -34,7 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
           title: data['title'],
           price: data['price'],
           created: (data['created'] as Timestamp).toDate(),
-          thumbnailImageUrl: 'placeholder.png',
+          thumbnailImageUrl: data['images'] != null
+              ? (data['images'] as List<dynamic>).cast<String>().first
+              : 'placeholder.png',
           region: '노량진동',
           comments: 0,
           likes: 0,
