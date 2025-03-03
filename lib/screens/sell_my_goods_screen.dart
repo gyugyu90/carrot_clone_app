@@ -81,6 +81,28 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
     }
   }
 
+  void _handleDeleteImage(GoodsImage image) {
+    setState(() {
+      _images.remove(image);
+    });
+
+    if (image.remoteImageUrl == null) {
+      return;
+    }
+
+    final remoteImageUrl = image.remoteImageUrl!;
+    final key = remoteImageUrl
+        .substring(
+            remoteImageUrl.indexOf('images'), remoteImageUrl.indexOf('?'))
+        .replaceAll('%2F', '/');
+
+    FirebaseStorage.instance.ref().child(key).delete().then((value) {
+      debugPrint('file deleted :: $key');
+    }).onError((error, stackTrace) {
+      debugPrintStack(label: 'file delete error', stackTrace: stackTrace);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,6 +140,7 @@ class _SellMyGoodsScreenState extends State<SellMyGoodsScreen> {
             GoodsImageListView(
               images: _images,
               onAddImage: _pickAndUploadImage,
+              onDeleteImage: _handleDeleteImage,
             ),
             const FormLabel('제목'),
             TextField(

@@ -8,10 +8,12 @@ class GoodsImageListView extends StatelessWidget {
     super.key,
     required this.images,
     required this.onAddImage,
+    required this.onDeleteImage,
   });
 
   final List<GoodsImage> images;
   final void Function() onAddImage;
+  final void Function(GoodsImage image) onDeleteImage;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class GoodsImageListView extends StatelessWidget {
               : GoodsImageBox(
                   image: images[index - 1],
                   main: index == 1,
+                  onTapDelete: () => onDeleteImage(images[index - 1]),
                 );
         },
         scrollDirection: Axis.horizontal,
@@ -42,10 +45,12 @@ class GoodsImageBox extends StatelessWidget {
     super.key,
     required this.image,
     required this.main,
+    required this.onTapDelete,
   });
 
   final GoodsImage image;
   final bool main;
+  final void Function() onTapDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +78,7 @@ class GoodsImageBox extends StatelessWidget {
             width: 15,
             height: 15,
             child: IconButton(
-              onPressed: () {},
+              onPressed: onTapDelete,
               icon: const Icon(Icons.close),
               iconSize: 12,
               color: Colors.white,
